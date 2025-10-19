@@ -7,6 +7,8 @@ app.use(express.json());
 app.use(express.static("public"));
 const server = http.createServer(app);
 const io = new Server(server);
+
+// Initially use a Map later redis can be used to scale websockets
 const emailToSocket = new Map();
 
 app.get("/", (req, res) => {
@@ -14,7 +16,6 @@ app.get("/", (req, res) => {
 });
 
 io.on("connection", (socket) => {
-  console.table(emailToSocket);
   socket.on("save-user", (data) => {
     console.log("Save User Data: ", data);
     if (emailToSocket.has(data.email)) {
@@ -23,7 +24,6 @@ io.on("connection", (socket) => {
     }
 
     emailToSocket.set(data.email, { socketId: socket.id, name: data.name });
-    console.log(emailToSocket);
     socket.emit("user-saved", {
       message: `Hi Mr. ${data.name}`,
     });
@@ -59,12 +59,8 @@ io.on("connection", (socket) => {
     console.log(emailToSocket.entries());
 
     for (const [email, socketId] of emailToSocket.entries()) {
-      console.log(email, socketId);
-      console.log("Socket.id: ", socket.id);
-      debugger;
       if (socket.id === socketId) {
         emailToSocket.delete(email);
-        debugger;
         console.log("Map after deleting user; ", emailToSocket);
         break;
       }

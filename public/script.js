@@ -49,7 +49,6 @@ async function connectFriend() {
   isSender = true;
 
   try {
-    alert("invoded");
     channel = peer.createDataChannel("chat");
     channel.onopen = () => alert("Connected via DataChannel");
 
