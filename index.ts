@@ -1,6 +1,8 @@
 import express from "express";
-import { Server } from "socket.io";
+import type { Request, Response } from "express";
+import { Server, Socket } from "socket.io";
 import http from "http";
+import type Data from "./Types/data.model.js";
 
 const app = express();
 app.use(express.json());
@@ -11,13 +13,12 @@ const io = new Server(server);
 // Initially use a Map later redis can be used to scale websockets
 const emailToSocket = new Map();
 
-app.get("/", (req, res) => {
+app.get("/", (req: Request, res: Response) => {
   res.sendFile("index.html");
 });
 
-io.on("connection", (socket) => {
+io.on("connection", (socket: Socket) => {
   socket.on("save-user", (data) => {
-    console.log("Save User Data: ", data);
     if (emailToSocket.has(data.email)) {
       socket.emit("user-saved", { message: "Email already exists" });
       return;
@@ -29,7 +30,7 @@ io.on("connection", (socket) => {
     });
   });
 
-  socket.on("offer", (data) => {
+  socket.on("offer", (data: Data) => {
     const friend = emailToSocket.get(data.to);
     if (!friend) {
       socket.emit("friend-status", {
@@ -42,7 +43,7 @@ io.on("connection", (socket) => {
     socket.to(friend.socketId).emit("offer", data);
   });
 
-  socket.on("answer", (data) => {
+  socket.on("answer", (data: Data) => {
     const friend = emailToSocket.get(data.to);
     if (!friend) return;
     console.log(`Sending answer from ${data.from} to ${data.to}`);
