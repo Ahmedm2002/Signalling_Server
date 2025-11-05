@@ -18,9 +18,10 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 io.on("connection", (socket: Socket) => {
+  console.log("User Connect: ", socket.id);
   socket.on("save-user", (data) => {
     if (emailToSocket.has(data.email)) {
-      socket.emit("user-saved", { message: "Email already exists" });
+      socket.emit("user-saved", { message: `Hello Mr. ${data.email}` });
       return;
     }
 
@@ -28,6 +29,7 @@ io.on("connection", (socket: Socket) => {
     socket.emit("user-saved", {
       message: `Hi Mr. ${data.name}`,
     });
+    console.log("Map Staus: ", emailToSocket);
   });
 
   socket.on("offer", (data: Data) => {
@@ -70,7 +72,7 @@ io.on("connection", (socket: Socket) => {
   });
 });
 
-server.listen(3000, () => {
+server.listen(5000, () => {
   console.log("Server Started");
-  console.log("http://localhost:3000");
+  console.log("http://localhost:5000");
 });

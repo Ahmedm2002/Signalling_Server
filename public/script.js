@@ -104,6 +104,7 @@ socket.on("answer", async (data) => {
 });
 
 peer.onicecandidate = (event) => {
+  console.log("Ice candidate Event: ", event);
   if (event.candidate) {
     socket.emit("ice-candidates", {
       from: user.email,

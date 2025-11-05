@@ -26,7 +26,7 @@ project/
 │
 ├── Dockerfile
 ├── docker-compose.yml
-├── index.js
+├── index.ts
 ├── package.json
 ├── public/
 │   ├── index.html
