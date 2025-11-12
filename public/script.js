@@ -12,6 +12,8 @@ const message = document.getElementById("message");
 const friendConnectCnt = document.getElementById("connectFriend");
 const friendEmail = document.getElementById("friendEmail");
 
+console.log("User: ", user);
+
 if (user) {
   onBoardingContainer.style.display = "none";
   friendConnectCnt.style.display = "block";
@@ -120,4 +122,8 @@ socket.on("set-iceCandidates", async (data) => {
   } catch (error) {
     console.error("Error adding ICE candidate", error);
   }
+});
+
+socket.on("disconnect", (socket) => {
+  console.log("User disconnected");
 });
