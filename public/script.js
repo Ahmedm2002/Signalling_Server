@@ -53,6 +53,10 @@ async function connectFriend() {
   try {
     channel = peer.createDataChannel("chat");
     channel.onopen = () => alert("Connected via DataChannel");
+    channel.onmessage = (e) => {
+      console.log(e);
+      alert(`Message: ${e.data}`);
+    };
 
     const offer = await peer.createOffer();
     await peer.setLocalDescription(offer);
@@ -81,6 +85,10 @@ socket.on("offer", async (data) => {
     peer.ondatachannel = (event) => {
       channel = event.channel;
       channel.onopen = () => alert("Connected via DataChannel");
+      channel.onmessage = (e) => {
+        console.log(e);
+        alert(`Message: ${e.data}`);
+      };
     };
 
     const answer = await peer.createAnswer();

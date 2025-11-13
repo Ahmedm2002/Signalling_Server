@@ -61,9 +61,10 @@ io.on("connection", (socket: Socket) => {
   });
 
   socket.on("disconnect", () => {
-    if (emailToSocket.has(socket.data.email)) {
-      emailToSocket.delete(socket.data.email);
-      console.log("User removed from the map");
+    const userMail = socket.data.email;
+    if (emailToSocket.has(userMail)) {
+      emailToSocket.delete(userMail);
+      console.log(userMail, " removed from the map");
     }
     console.log("User disconnected:", socket.id);
   });
