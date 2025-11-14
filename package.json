@@ -18,6 +18,14 @@
     "real-time",
     "peer-to-peer"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ahmedm2002/Signalling_Server/"
+  },
+  "bugs": {
+    "url": "https://github.com/Ahmedm2002/Signalling_Server/issues"
+  },
+  "homepage": "https://github.com/Ahmedm2002/Signalling_Server#readme",
   "author": "Ahmed Mujtaba",
   "license": "ISC",
   "dependencies": {
