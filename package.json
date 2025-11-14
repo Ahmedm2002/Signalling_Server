@@ -1,19 +1,27 @@
 {
   "name": "signalling_server",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.ts",
+  "description": "WebRTC signalling server using Express, Socket.IO, and TypeScript",
+  "main": "dist/index.js",
   "type": "module",
   "scripts": {
     "dev": "nodemon --watch index.ts",
-    "start": "node index.ts"
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "webrtc",
+    "signalling server",
+    "socket.io",
+    "typescript",
+    "express",
+    "real-time",
+    "peer-to-peer"
+  ],
+  "author": "Ahmed Mujtaba",
   "license": "ISC",
   "dependencies": {
     "express": "^5.1.0",
-    "mongoose": "^8.18.1",
     "socket.io": "^4.8.1"
   },
   "devDependencies": {
@@ -22,5 +30,8 @@
     "nodemon": "^3.1.10",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }

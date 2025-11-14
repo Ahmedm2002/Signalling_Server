@@ -20,6 +20,8 @@ app.get("/", (req: Request, res: Response) => {
 io.on("connection", (socket: Socket) => {
   console.log("User Connect: ", socket.id);
   socket.on("save-user", (data) => {
+    socket.data.email = data.email;
+    socket.data.name = data.name;
     if (emailToSocket.has(data.email)) {
       socket.emit("user-saved", { message: `Hello Mr. ${data.email}` });
       return;
@@ -29,7 +31,7 @@ io.on("connection", (socket: Socket) => {
     socket.emit("user-saved", {
       message: `Hi Mr. ${data.name}`,
     });
-    console.log("Map Staus: ", emailToSocket);
+    console.log("Map Status: ", emailToSocket);
   });
 
   socket.on("offer", (data: Data) => {
@@ -59,14 +61,10 @@ io.on("connection", (socket: Socket) => {
   });
 
   socket.on("disconnect", () => {
-    console.log(emailToSocket.entries());
-
-    for (const [email, socketId] of emailToSocket.entries()) {
-      if (socket.id === socketId) {
-        emailToSocket.delete(email);
-        console.log("Map after deleting user; ", emailToSocket);
-        break;
-      }
+    const userMail = socket.data.email;
+    if (emailToSocket.has(userMail)) {
+      emailToSocket.delete(userMail);
+      console.log(userMail, " removed from the map");
     }
     console.log("User disconnected:", socket.id);
   });

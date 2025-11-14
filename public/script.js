@@ -12,6 +12,8 @@ const message = document.getElementById("message");
 const friendConnectCnt = document.getElementById("connectFriend");
 const friendEmail = document.getElementById("friendEmail");
 
+console.log("User: ", user);
+
 if (user) {
   onBoardingContainer.style.display = "none";
   friendConnectCnt.style.display = "block";
@@ -51,6 +53,10 @@ async function connectFriend() {
   try {
     channel = peer.createDataChannel("chat");
     channel.onopen = () => alert("Connected via DataChannel");
+    channel.onmessage = (e) => {
+      console.log(e);
+      alert(`Message: ${e.data}`);
+    };
 
     const offer = await peer.createOffer();
     await peer.setLocalDescription(offer);
@@ -79,6 +85,10 @@ socket.on("offer", async (data) => {
     peer.ondatachannel = (event) => {
       channel = event.channel;
       channel.onopen = () => alert("Connected via DataChannel");
+      channel.onmessage = (e) => {
+        console.log(e);
+        alert(`Message: ${e.data}`);
+      };
     };
 
     const answer = await peer.createAnswer();
@@ -120,4 +130,8 @@ socket.on("set-iceCandidates", async (data) => {
   } catch (error) {
     console.error("Error adding ICE candidate", error);
   }
+});
+
+socket.on("disconnect", (socket) => {
+  console.log("User disconnected");
 });
