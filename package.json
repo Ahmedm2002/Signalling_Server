@@ -2,7 +2,7 @@
   "name": "signalling_server",
   "version": "1.0.0",
   "description": "WebRTC signalling server using Express, Socket.IO, and TypeScript",
-  "main": "dist/index.js",
+  "main": "index.ts",
   "type": "module",
   "scripts": {
     "dev": "nodemon --watch index.ts",

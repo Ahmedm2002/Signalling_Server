@@ -53,7 +53,7 @@ project/
 3. Access the test page:
 
    ```
-   http://localhost:3000
+   http://localhost:5000
    ```
 
 ---
@@ -69,14 +69,14 @@ docker-compose up --build
 This will:
 
 - Build the Node.js image using the provided **Dockerfile**
-- Expose port **3000** on your host
+- Expose port **5000** on your host
 - Mount your local directory for live code updates
 - Automatically restart the dev server on code changes
 
 Then visit:
 
 ```
-http://localhost:3000
+http://localhost:5000
 ```
 
 ### 2. Stopping the container
@@ -100,7 +100,7 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 3000
+EXPOSE 5000
 
 CMD ["npm", "run", "dev"]
 ```
@@ -110,7 +110,7 @@ CMD ["npm", "run", "dev"]
 - **COPY package\*.json .**: Copies dependency files for layer caching.
 - **RUN npm install**: Installs dependencies.
 - **COPY . .**: Copies project files into the container.
-- **EXPOSE 3000**: Opens port 3000 for external access.
+- **EXPOSE 5000**: Opens port 5000 for external access.
 - **CMD**: Runs the development command.
 
 ---
@@ -122,14 +122,14 @@ services:
   node-app:
     build: .
     ports:
-      - "3000:3000"
+      - "5000:5000"
     volumes:
       - ./:/usr/src/app
       - /usr/src/app/node_modules
 ```
 
 - **build .**: Builds the Docker image from the current directory.
-- **ports**: Maps container port 3000 to host port 3000.
+- **ports**: Maps container port 5000 to host port 5000.
 - **volumes**:
 
   - Mounts your local source code for hot reload.
