@@ -20,12 +20,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/Ahmedm2002/Signalling_Server/"
+    "url": "https://github.com/Ahmedm2002/signalling-server/"
   },
   "bugs": {
-    "url": "https://github.com/Ahmedm2002/Signalling_Server/issues"
+    "url": "https://github.com/Ahmedm2002/signalling-server/issues"
   },
-  "homepage": "https://github.com/Ahmedm2002/Signalling_Server#readme",
+  "homepage": "https://github.com/Ahmedm2002/signalling-server#readme",
   "author": "Ahmed Mujtaba",
   "license": "ISC",
   "dependencies": {
